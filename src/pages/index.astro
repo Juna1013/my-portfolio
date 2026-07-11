@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { getCollection } from 'astro:content';
+import SiteHeader from '../components/SiteHeader.astro';
 import { about } from '../data/about';
 import { blog } from '../data/blog';
 import { works } from '../data/works';
@@ -88,14 +89,7 @@ const formatBlogDate = (date: Date) =>
 <div class="wipe" id="wipe" aria-hidden="true"></div>
 <svg class="ripple-layer" id="rippleLayer" aria-hidden="true"></svg>
 
-<nav>
-  <a class="logo" href="#/" data-route="home"><span class="kanji">栖</span><span class="latin">SUMIKA</span></a>
-  <ul class="nav-links">
-    <li><a href="#/" data-route="home">ABOUT</a></li>
-    <li><a href="#/works" data-route="works">WORKS</a></li>
-    <li><a href="#/blog" data-route="blog">BLOG</a></li>
-  </ul>
-</nav>
+<SiteHeader isHome />
 
 <!-- ============ HOME ============ -->
 <div class="view" data-route="home">

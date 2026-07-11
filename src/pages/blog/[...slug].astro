@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import SiteHeader from '../../components/SiteHeader.astro';
 import '../../styles/global.css';
 
 export async function getStaticPaths() {
@@ -28,10 +29,7 @@ const formattedDate = `${post.data.pubDate.getFullYear()}.${String(post.data.pub
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <nav class="article-nav">
-      <a class="logo" href="/"><span class="kanji">准</span><span class="latin">JUNA</span></a>
-      <a class="back-link" href="/#/blog">BLOG 一覧へ</a>
-    </nav>
+    <SiteHeader immediate />
     <main class="article-main">
       <article class="article-content">
         <p class="eyebrow">BLOG — {post.data.source}</p>
