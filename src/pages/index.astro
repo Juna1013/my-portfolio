@@ -17,6 +17,13 @@ const formatBlogDate = (date: Date) =>
 
 const title = '准 — JUNA | Portfolio';
 const description = '川崎准也（ジュナ）のポートフォリオ。LLMエージェントセキュリティの研究、公開アプリケーション、技術ブログの記録。';
+
+const socialLinks = [
+  { label: 'GitHub', mark: 'G', text: 'GITHUB', href: '#' },
+  { label: 'X', mark: 'X', text: 'X', href: '#' },
+  { label: 'Zenn', mark: 'Z', text: 'ZENN', href: '#' },
+  { label: 'Qiita', mark: 'Q', text: 'QIITA', href: '#' },
+] as const;
 ---
 <!DOCTYPE html>
 <html lang="ja" id="top">
@@ -102,10 +109,12 @@ const description = '川崎准也（ジュナ）のポートフォリオ。LLM�
 <!-- ============ footer ============ -->
 <footer class="flex flex-col items-center gap-[2.4em] border-t border-line px-[7vw] pt-[8vh] pb-[4em] text-center">
   <div class="flex flex-wrap justify-center gap-[2.4em]">
-    <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href="#" aria-label="GitHub"><span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">G</span><span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">GITHUB</span></a>
-    <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href="#" aria-label="X"><span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">X</span><span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">X</span></a>
-    <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href="#" aria-label="Zenn"><span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">Z</span><span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">ZENN</span></a>
-    <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href="#" aria-label="Qiita"><span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">Q</span><span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">QIITA</span></a>
+    {socialLinks.map((link) => (
+      <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href={link.href} aria-label={link.label}>
+        <span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">{link.mark}</span>
+        <span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">{link.text}</span>
+      </a>
+    ))}
   </div>
   <span class="font-latin text-[11px] tracking-[.3em] text-ink-faint">© 2026 Juna1013</span>
 </footer>

@@ -8,6 +8,12 @@ const { isHome = false, immediate = false } = Astro.props;
 const links = isHome
   ? { home: '#/', works: '#/works', blog: '#/blog' }
   : { home: '/', works: '/#/works', blog: '/#/blog' };
+
+const navItems = [
+  { label: 'ABOUT', route: 'home' },
+  { label: 'WORKS', route: 'works' },
+  { label: 'BLOG', route: 'blog' },
+] as const;
 ---
 
 <nav class:list={[
@@ -18,8 +24,14 @@ const links = isHome
     <span class="text-2xl leading-none font-semibold">栖</span><span class="font-latin text-[11.5px] tracking-[.42em] text-ink-faint">SUMIKA</span>
   </a>
   <ul class="m-0 flex list-none gap-[2.6em] p-0 max-mobile:gap-[1.6em]">
-    <li><a class="nav-link border-b border-transparent pb-[3px] font-latin text-[13px] font-medium tracking-[.3em] text-ink-soft no-underline transition-colors duration-350 hover:text-vermilion" href={links.home} data-route={isHome ? 'home' : undefined}>ABOUT</a></li>
-    <li><a class="nav-link border-b border-transparent pb-[3px] font-latin text-[13px] font-medium tracking-[.3em] text-ink-soft no-underline transition-colors duration-350 hover:text-vermilion" href={links.works} data-route={isHome ? 'works' : undefined}>WORKS</a></li>
-    <li><a class="nav-link border-b border-transparent pb-[3px] font-latin text-[13px] font-medium tracking-[.3em] text-ink-soft no-underline transition-colors duration-350 hover:text-vermilion" href={links.blog} data-route={isHome ? 'blog' : undefined}>BLOG</a></li>
+    {navItems.map((item) => (
+      <li>
+        <a
+          class="nav-link border-b border-transparent pb-[3px] font-latin text-[13px] font-medium tracking-[.3em] text-ink-soft no-underline transition-colors duration-350 hover:text-vermilion"
+          href={links[item.route]}
+          data-route={isHome ? item.route : undefined}
+        >{item.label}</a>
+      </li>
+    ))}
   </ul>
 </nav>
