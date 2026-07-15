@@ -8,12 +8,10 @@ import SiteHeader from '../components/SiteHeader.astro';
 import { about } from '../data/about';
 import { blog } from '../data/blog';
 import { works } from '../data/works';
+import { formatBlogDate } from '../utils/date';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const formatBlogDate = (date: Date) =>
-  `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`;
 
 const title = '准 — JUNA | Portfolio';
 const description = '川崎准也（ジュナ）のポートフォリオ。LLMエージェントセキュリティの研究、公開アプリケーション、技術ブログの記録。';

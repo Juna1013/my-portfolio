@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import SeoHead from '../../components/SeoHead.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import '../../styles/global.css';
+import { formatBlogDate } from '../../utils/date';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -15,7 +16,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const formattedDate = `${post.data.pubDate.getFullYear()}.${String(post.data.pubDate.getMonth() + 1).padStart(2, '0')}`;
+const formattedDate = formatBlogDate(post.data.pubDate);
 const title = `${post.data.title} | 准 — JUNA`;
 const publishedTime = post.data.pubDate.toISOString();
 ---
