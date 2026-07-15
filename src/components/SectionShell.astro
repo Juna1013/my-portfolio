@@ -1,0 +1,35 @@
+---
+interface Props {
+  id: string;
+  ghost: string;
+  eyebrow: string;
+  title: string;
+  ghostSide?: 'left' | 'right';
+}
+
+const {
+  id,
+  ghost,
+  eyebrow,
+  title,
+  ghostSide = 'right',
+} = Astro.props;
+---
+
+<main class="relative z-5">
+  <section class="relative mx-auto min-h-[78svh] max-w-[1060px] px-[7vw] pt-[17vh] pb-[13vh] max-mobile:px-[8vw] max-mobile:pt-[14vh] max-mobile:pb-[10vh]" {id}>
+    <span
+      class:list={[
+        'pointer-events-none absolute top-1/2 -translate-y-1/2 text-[min(32vmin,320px)] leading-none font-semibold text-ink opacity-5 select-none max-mobile:text-[42vmin]',
+        ghostSide === 'left' ? 'left-[1%]' : 'right-[2%]',
+      ]}
+      aria-hidden="true"
+    >{ghost}</span>
+    <div class="reveal">
+      <p class="m-0 mb-[2em] flex items-center gap-3.5 font-latin text-xs font-semibold tracking-[.44em] text-vermilion before:h-px before:w-9 before:bg-current before:opacity-60">{eyebrow}</p>
+      <h2 class="m-0 mb-[1.2em] text-[clamp(25px,3.4vmin,36px)] font-medium tracking-[.14em]">{title}</h2>
+      <slot />
+    </div>
+    <slot name="after" />
+  </section>
+</main>

@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { getCollection } from 'astro:content';
 import HeroArtwork from '../components/HeroArtwork.astro';
 import SeoHead from '../components/SeoHead.astro';
+import SectionShell from '../components/SectionShell.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { about } from '../data/about';
 import { blog } from '../data/blog';
@@ -48,75 +49,54 @@ const description = '川崎准也（ジュナ）のポートフォリオ。LLM�
 
     <a class="scroll-hint absolute bottom-6 left-1/2 z-4 flex -translate-x-1/2 flex-col items-center gap-2.5 text-[11px] tracking-[.5em] text-ink-soft no-underline [writing-mode:vertical-rl]" href="#about">巡る<span class="scroll-line h-11 w-px origin-top bg-linear-to-b from-ink-soft to-transparent"></span></a>
   </header>
-  <main class="relative z-5">
-    <section class="relative mx-auto min-h-[78svh] max-w-[1060px] px-[7vw] pt-[17vh] pb-[13vh] max-mobile:px-[8vw] max-mobile:pt-[14vh] max-mobile:pb-[10vh]" id="about">
-      <span class="pointer-events-none absolute top-1/2 right-[2%] -translate-y-1/2 text-[min(32vmin,320px)] leading-none font-semibold text-ink opacity-5 select-none max-mobile:text-[42vmin]" aria-hidden="true">私</span>
-      <div class="reveal">
-        <p class="m-0 mb-[2em] flex items-center gap-3.5 font-latin text-xs font-semibold tracking-[.44em] text-vermilion before:h-px before:w-9 before:bg-current before:opacity-60">{about.eyebrow}</p>
-        <h2 class="m-0 mb-[1.2em] text-[clamp(25px,3.4vmin,36px)] font-medium tracking-[.14em]">{about.title}</h2>
-        {about.introduction.map((paragraph) => <p class="my-[1em] text-[15px] leading-[2.35] tracking-[.1em] text-[#4c453d]">{paragraph}</p>)}
-      </div>
+  <SectionShell id="about" ghost="私" eyebrow={about.eyebrow} title={about.title}>
+    {about.introduction.map((paragraph) => <p class="my-[1em] text-[15px] leading-[2.35] tracking-[.1em] text-[#4c453d]">{paragraph}</p>)}
 
-      <div class="reveal mt-[5em]">
-        <h3 class="m-0 mb-[2.2em] flex items-center gap-3.5 text-[17px] font-semibold tracking-[.3em]">{about.footprint.title}<span class="font-latin text-[11px] font-medium tracking-[.4em] text-ink-faint">{about.footprint.subtitle}</span></h3>
-        <ul class="relative m-0 list-none py-0 pr-0 pl-[26px] before:absolute before:top-1.5 before:bottom-1.5 before:left-0 before:w-0.5 before:rounded-sm before:bg-[linear-gradient(to_bottom,var(--color-ink)_0%,rgba(53,48,42,.35)_85%,transparent)] before:content-['']">
-          {about.footprint.entries.map((entry) => (
-            <li class="relative pb-[2.1em] pl-[22px] before:absolute before:top-[9px] before:left-[-26px] before:h-[9px] before:w-[9px] before:translate-x-[-3.5px] before:rotate-8 before:rounded-full before:bg-ink before:shadow-[1.5px_1px_0_rgba(53,48,42,.35)] before:content-[''] last:before:bg-vermilion">
-              <span class="mb-[.35em] block font-latin text-[13px] font-semibold tracking-[.24em] text-vermilion">{entry.year}</span>
-              <span class="text-[14.5px] leading-8 tracking-[.1em] text-[#4c453d]">{entry.text}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  </main>
+    <div slot="after" class="reveal mt-[5em]">
+      <h3 class="m-0 mb-[2.2em] flex items-center gap-3.5 text-[17px] font-semibold tracking-[.3em]">{about.footprint.title}<span class="font-latin text-[11px] font-medium tracking-[.4em] text-ink-faint">{about.footprint.subtitle}</span></h3>
+      <ul class="relative m-0 list-none py-0 pr-0 pl-[26px] before:absolute before:top-1.5 before:bottom-1.5 before:left-0 before:w-0.5 before:rounded-sm before:bg-[linear-gradient(to_bottom,var(--color-ink)_0%,rgba(53,48,42,.35)_85%,transparent)] before:content-['']">
+        {about.footprint.entries.map((entry) => (
+          <li class="relative pb-[2.1em] pl-[22px] before:absolute before:top-[9px] before:left-[-26px] before:h-[9px] before:w-[9px] before:translate-x-[-3.5px] before:rotate-8 before:rounded-full before:bg-ink before:shadow-[1.5px_1px_0_rgba(53,48,42,.35)] before:content-[''] last:before:bg-vermilion">
+            <span class="mb-[.35em] block font-latin text-[13px] font-semibold tracking-[.24em] text-vermilion">{entry.year}</span>
+            <span class="text-[14.5px] leading-8 tracking-[.1em] text-[#4c453d]">{entry.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </SectionShell>
 </div>
 
 <!-- ============ WORKS ============ -->
 <div class="view" data-route="works">
-  <main class="relative z-5">
-    <section class="relative mx-auto min-h-[78svh] max-w-[1060px] px-[7vw] pt-[17vh] pb-[13vh] max-mobile:px-[8vw] max-mobile:pt-[14vh] max-mobile:pb-[10vh]" id="works">
-      <span class="pointer-events-none absolute top-1/2 left-[1%] -translate-y-1/2 text-[min(32vmin,320px)] leading-none font-semibold text-ink opacity-5 select-none max-mobile:text-[42vmin]" aria-hidden="true">作</span>
-      <div class="reveal">
-        <p class="m-0 mb-[2em] flex items-center gap-3.5 font-latin text-xs font-semibold tracking-[.44em] text-vermilion before:h-px before:w-9 before:bg-current before:opacity-60">{works.eyebrow}</p>
-        <h2 class="m-0 mb-[1.2em] text-[clamp(25px,3.4vmin,36px)] font-medium tracking-[.14em]">{works.title}</h2>
-        <div class="mt-[3em] grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[26px]">
-          {works.items.map((item) => (
-            <a class="group relative flex flex-col gap-[1em] rounded-sm border border-line bg-[rgba(255,252,242,.4)] px-[1.7em] pt-[2em] pb-[1.7em] text-inherit no-underline transition-[transform,border-color,box-shadow] duration-450 ease-in-out hover:-translate-y-[5px] hover:border-[rgba(177,58,42,.55)] hover:shadow-[0_14px_30px_-18px_rgba(53,48,42,.4)]" href={item.href}>
-              <span class="flex h-11 w-11 -rotate-2 items-center justify-center rounded-[3px] border-[1.4px] border-ink text-[22px] font-semibold group-hover:border-vermilion group-hover:text-vermilion" aria-hidden="true">{item.character}</span>
-              <h3 class="m-0 text-[17.5px] font-semibold tracking-[.12em]">{item.title}</h3>
-              <p class="m-0 flex-1 text-[13px] leading-8 tracking-[.08em] text-ink-soft">{item.description}</p>
-              <div class="flex flex-wrap gap-2">{item.tags.map((tag) => <span class="rounded-xs border border-line px-[.8em] py-[.35em] font-latin text-[10.5px] tracking-[.22em] text-ink-faint">{tag}</span>)}</div>
-              <div class="flex gap-[1.6em] font-latin text-[11.5px] font-semibold tracking-[.26em] text-vermilion">{item.links.map((link) => <span>{link}</span>)}</div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  </main>
+  <SectionShell id="works" ghost="作" ghostSide="left" eyebrow={works.eyebrow} title={works.title}>
+    <div class="mt-[3em] grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[26px]">
+      {works.items.map((item) => (
+        <a class="group relative flex flex-col gap-[1em] rounded-sm border border-line bg-[rgba(255,252,242,.4)] px-[1.7em] pt-[2em] pb-[1.7em] text-inherit no-underline transition-[transform,border-color,box-shadow] duration-450 ease-in-out hover:-translate-y-[5px] hover:border-[rgba(177,58,42,.55)] hover:shadow-[0_14px_30px_-18px_rgba(53,48,42,.4)]" href={item.href}>
+          <span class="flex h-11 w-11 -rotate-2 items-center justify-center rounded-[3px] border-[1.4px] border-ink text-[22px] font-semibold group-hover:border-vermilion group-hover:text-vermilion" aria-hidden="true">{item.character}</span>
+          <h3 class="m-0 text-[17.5px] font-semibold tracking-[.12em]">{item.title}</h3>
+          <p class="m-0 flex-1 text-[13px] leading-8 tracking-[.08em] text-ink-soft">{item.description}</p>
+          <div class="flex flex-wrap gap-2">{item.tags.map((tag) => <span class="rounded-xs border border-line px-[.8em] py-[.35em] font-latin text-[10.5px] tracking-[.22em] text-ink-faint">{tag}</span>)}</div>
+          <div class="flex gap-[1.6em] font-latin text-[11.5px] font-semibold tracking-[.26em] text-vermilion">{item.links.map((link) => <span>{link}</span>)}</div>
+        </a>
+      ))}
+    </div>
+  </SectionShell>
 </div>
 
 <!-- ============ BLOG ============ -->
 <div class="view" data-route="blog">
-  <main class="relative z-5">
-    <section class="relative mx-auto min-h-[78svh] max-w-[1060px] px-[7vw] pt-[17vh] pb-[13vh] max-mobile:px-[8vw] max-mobile:pt-[14vh] max-mobile:pb-[10vh]" id="blog">
-      <span class="pointer-events-none absolute top-1/2 right-[2%] -translate-y-1/2 text-[min(32vmin,320px)] leading-none font-semibold text-ink opacity-5 select-none max-mobile:text-[42vmin]" aria-hidden="true">記</span>
-      <div class="reveal">
-        <p class="m-0 mb-[2em] flex items-center gap-3.5 font-latin text-xs font-semibold tracking-[.44em] text-vermilion before:h-px before:w-9 before:bg-current before:opacity-60">{blog.eyebrow}</p>
-        <h2 class="m-0 mb-[1.2em] text-[clamp(25px,3.4vmin,36px)] font-medium tracking-[.14em]">{blog.title}</h2>
-        <ul class="m-0 mt-[2.6em] list-none border-t border-line p-0">
-          {posts.map((post) => (
-            <li><a class="group flex items-center gap-[1.6em] border-b border-line px-[.4em] py-[1.5em] text-inherit no-underline transition-colors duration-350 hover:bg-[rgba(177,58,42,.05)]" href={`/blog/${post.id}/`}>
-              <span class="min-w-[6.2em] font-latin text-xs tracking-[.2em] text-ink-faint max-mobile:min-w-[5.4em] max-mobile:text-[11px]">{formatBlogDate(post.data.pubDate)}</span>
-              <span class="flex h-6 w-6 flex-none -rotate-2 items-center justify-center rounded-[3px] border-[1.3px] border-ink font-latin text-xs font-semibold group-hover:border-vermilion group-hover:text-vermilion" aria-hidden="true">{post.data.source}</span>
-              <span class="text-[14.5px] leading-[1.9] tracking-[.08em]">{post.data.title}</span>
-            </a></li>
-          ))}
-        </ul>
-        <p class="mt-[2.2em] mb-[1em] text-[12.5px] tracking-[.14em] text-ink-faint">{blog.note}</p>
-      </div>
-    </section>
-  </main>
+  <SectionShell id="blog" ghost="記" eyebrow={blog.eyebrow} title={blog.title}>
+    <ul class="m-0 mt-[2.6em] list-none border-t border-line p-0">
+      {posts.map((post) => (
+        <li><a class="group flex items-center gap-[1.6em] border-b border-line px-[.4em] py-[1.5em] text-inherit no-underline transition-colors duration-350 hover:bg-[rgba(177,58,42,.05)]" href={`/blog/${post.id}/`}>
+          <span class="min-w-[6.2em] font-latin text-xs tracking-[.2em] text-ink-faint max-mobile:min-w-[5.4em] max-mobile:text-[11px]">{formatBlogDate(post.data.pubDate)}</span>
+          <span class="flex h-6 w-6 flex-none -rotate-2 items-center justify-center rounded-[3px] border-[1.3px] border-ink font-latin text-xs font-semibold group-hover:border-vermilion group-hover:text-vermilion" aria-hidden="true">{post.data.source}</span>
+          <span class="text-[14.5px] leading-[1.9] tracking-[.08em]">{post.data.title}</span>
+        </a></li>
+      ))}
+    </ul>
+    <p class="mt-[2.2em] mb-[1em] text-[12.5px] tracking-[.14em] text-ink-faint">{blog.note}</p>
+  </SectionShell>
 </div>
 
 <!-- ============ footer ============ -->
