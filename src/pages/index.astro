@@ -11,14 +11,29 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
 const formatBlogDate = (date: Date) =>
   `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`;
+
+const title = '准 — JUNA | Portfolio';
+const description = '川崎准也（ジュナ）のポートフォリオ。LLMエージェントセキュリティの研究、公開アプリケーション、技術ブログの記録。';
 ---
 <!DOCTYPE html>
 <html lang="ja" id="top">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="川崎准也（ジュナ）のポートフォリオ。LLMエージェントセキュリティの研究、公開アプリケーション、技術ブログの記録。">
-<title>准 — JUNA | Portfolio</title>
+<meta name="description" content={description}>
+<meta name="author" content="川崎准也">
+<meta name="generator" content={Astro.generator}>
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#f0e8d5">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="准 — JUNA">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<title>{title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
@@ -85,23 +100,23 @@ const formatBlogDate = (date: Date) =>
   </defs>
 </svg>
 
-<div class="grain" aria-hidden="true"></div>
-<div class="wipe" id="wipe" aria-hidden="true"></div>
-<svg class="ripple-layer" id="rippleLayer" aria-hidden="true"></svg>
+<div class="grain pointer-events-none fixed inset-0 z-60 opacity-50 mix-blend-multiply" aria-hidden="true"></div>
+<div class="wipe pointer-events-none fixed -inset-[6%_10%] z-55 translate-x-[-118%] -skew-x-8 bg-[linear-gradient(100deg,#1c1814,#241f1a_55%,#2c2620)]" id="wipe" aria-hidden="true"></div>
+<svg class="pointer-events-none fixed inset-0 z-50" id="rippleLayer" aria-hidden="true"></svg>
 
 <SiteHeader isHome />
 
 <!-- ============ HOME ============ -->
 <div class="view" data-route="home">
-  <header class="hero" id="hero">
-    <svg class="hake-svg" viewBox="0 0 1200 620" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
+  <header class="relative min-h-svh overflow-hidden" id="hero">
+    <svg class="pointer-events-none absolute top-0 left-0 z-0 h-auto w-full" viewBox="0 0 1200 620" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
       <path class="hake" pathLength="1"
         d="M-70 330 C300 285 820 275 1270 315"
         stroke="#35302a" stroke-width="120" fill="none" stroke-linecap="round"
         filter="url(#hakeRough)"/>
     </svg>
 
-    <svg class="branch" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+    <svg class="pointer-events-none absolute top-[clamp(50px,7vh,84px)] left-0 z-1 h-auto w-full max-mobile:left-[-78%] max-mobile:w-[178%]" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
       <g filter="url(#inkRough)">
         <!-- 幹（三段で先細り・左から横断） -->
         <path class="stk" pathLength="1" style="--dl:.1s"  stroke="#3b352d" stroke-width="13"  d="M-30 250 C80 238 150 258 260 246 C360 236 420 210 520 202"/>
@@ -148,37 +163,37 @@ const formatBlogDate = (date: Date) =>
       <g id="bloomLayer" filter="url(#inkRoughFine)"></g>
     </svg>
 
-    <div class="petal-layer" aria-hidden="true"></div>
+    <div class="petal-layer pointer-events-none absolute inset-0 z-3 overflow-hidden" aria-hidden="true"></div>
 
-    <div class="hero-copy">
-      <h1 class="name">桜花爛漫</h1>
-      <p class="name-sub">静かに、手を動かす。</p>
+    <div class="absolute top-[clamp(300px,36vh,380px)] right-[6.5vw] z-4 flex flex-row-reverse gap-[2.4vmin] max-mobile:top-[30vh] max-mobile:right-[7vw]">
+      <h1 class="hero-name m-0 text-[clamp(44px,7.8vmin,88px)] leading-[1.08] font-medium tracking-[.16em] [writing-mode:vertical-rl]">桜花爛漫</h1>
+      <p class="hero-sub m-0 pt-[1.7em] text-[clamp(12px,1.9vmin,17px)] tracking-[.42em] text-ink-soft [writing-mode:vertical-rl]">静かに、手を動かす。</p>
     </div>
 
-    <p class="lead">
+    <p class="hero-lead absolute bottom-[clamp(90px,16vh,160px)] left-[6.5vw] z-4 m-0 max-w-[44ch] text-[14.5px] leading-[2.3] tracking-[.14em] text-ink-soft max-mobile:bottom-[14vh] max-mobile:max-w-[64vw] max-mobile:text-[13px]">
       茨城高専 機械制御系。LLMエージェントのセキュリティを研究しながら、<br>
       墨のシミュレーションや、Webの小さな道具を作っています。
-      <span class="lead-en">STUDENT · BUILDER — JUNA</span>
+      <span class="mt-[1.2em] block font-latin text-[10.5px] font-medium tracking-[.36em] text-ink-faint">STUDENT · BUILDER — JUNA</span>
     </p>
 
-    <a class="scroll-hint" href="#about">巡る<span class="line"></span></a>
+    <a class="scroll-hint absolute bottom-6 left-1/2 z-4 flex -translate-x-1/2 flex-col items-center gap-2.5 text-[11px] tracking-[.5em] text-ink-soft no-underline [writing-mode:vertical-rl]" href="#about">巡る<span class="scroll-line h-11 w-px origin-top bg-linear-to-b from-ink-soft to-transparent"></span></a>
   </header>
-  <main>
-    <section id="about">
-      <span class="kanji-ghost" aria-hidden="true">私</span>
+  <main class="relative z-5">
+    <section class="relative mx-auto min-h-[78svh] max-w-[1060px] px-[7vw] pt-[17vh] pb-[13vh] max-mobile:px-[8vw] max-mobile:pt-[14vh] max-mobile:pb-[10vh]" id="about">
+      <span class="pointer-events-none absolute top-1/2 right-[2%] -translate-y-1/2 text-[min(32vmin,320px)] leading-none font-semibold text-ink opacity-5 select-none max-mobile:text-[42vmin]" aria-hidden="true">私</span>
       <div class="reveal">
-        <p class="eyebrow">{about.eyebrow}</p>
-        <h2>{about.title}</h2>
-        {about.introduction.map((paragraph) => <p>{paragraph}</p>)}
+        <p class="m-0 mb-[2em] flex items-center gap-3.5 font-latin text-xs font-semibold tracking-[.44em] text-vermilion before:h-px before:w-9 before:bg-current before:opacity-60">{about.eyebrow}</p>
+        <h2 class="m-0 mb-[1.2em] text-[clamp(25px,3.4vmin,36px)] font-medium tracking-[.14em]">{about.title}</h2>
+        {about.introduction.map((paragraph) => <p class="my-[1em] text-[15px] leading-[2.35] tracking-[.1em] text-[#4c453d]">{paragraph}</p>)}
       </div>
 
-      <div class="fp reveal">
-        <h3>{about.footprint.title}<span class="en">{about.footprint.subtitle}</span></h3>
-        <ul class="timeline">
+      <div class="reveal mt-[5em]">
+        <h3 class="m-0 mb-[2.2em] flex items-center gap-3.5 text-[17px] font-semibold tracking-[.3em]">{about.footprint.title}<span class="font-latin text-[11px] font-medium tracking-[.4em] text-ink-faint">{about.footprint.subtitle}</span></h3>
+        <ul class="relative m-0 list-none py-0 pr-0 pl-[26px] before:absolute before:top-1.5 before:bottom-1.5 before:left-0 before:w-0.5 before:rounded-sm before:bg-[linear-gradient(to_bottom,var(--color-ink)_0%,rgba(53,48,42,.35)_85%,transparent)] before:content-['']">
           {about.footprint.entries.map((entry) => (
-            <li>
-              <span class="year">{entry.year}</span>
-              <span class="what">{entry.text}</span>
+            <li class="relative pb-[2.1em] pl-[22px] before:absolute before:top-[9px] before:left-[-26px] before:h-[9px] before:w-[9px] before:translate-x-[-3.5px] before:rotate-8 before:rounded-full before:bg-ink before:shadow-[1.5px_1px_0_rgba(53,48,42,.35)] before:content-[''] last:before:bg-vermilion">
+              <span class="mb-[.35em] block font-latin text-[13px] font-semibold tracking-[.24em] text-vermilion">{entry.year}</span>
+              <span class="text-[14.5px] leading-8 tracking-[.1em] text-[#4c453d]">{entry.text}</span>
             </li>
           ))}
         </ul>
@@ -189,20 +204,20 @@ const formatBlogDate = (date: Date) =>
 
 <!-- ============ WORKS ============ -->
 <div class="view" data-route="works">
-  <main>
-    <section id="works">
-      <span class="kanji-ghost" aria-hidden="true">作</span>
+  <main class="relative z-5">
+    <section class="relative mx-auto min-h-[78svh] max-w-[1060px] px-[7vw] pt-[17vh] pb-[13vh] max-mobile:px-[8vw] max-mobile:pt-[14vh] max-mobile:pb-[10vh]" id="works">
+      <span class="pointer-events-none absolute top-1/2 left-[1%] -translate-y-1/2 text-[min(32vmin,320px)] leading-none font-semibold text-ink opacity-5 select-none max-mobile:text-[42vmin]" aria-hidden="true">作</span>
       <div class="reveal">
-        <p class="eyebrow">{works.eyebrow}</p>
-        <h2>{works.title}</h2>
-        <div class="cards">
+        <p class="m-0 mb-[2em] flex items-center gap-3.5 font-latin text-xs font-semibold tracking-[.44em] text-vermilion before:h-px before:w-9 before:bg-current before:opacity-60">{works.eyebrow}</p>
+        <h2 class="m-0 mb-[1.2em] text-[clamp(25px,3.4vmin,36px)] font-medium tracking-[.14em]">{works.title}</h2>
+        <div class="mt-[3em] grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[26px]">
           {works.items.map((item) => (
-            <a class="card" href={item.href}>
-              <span class="moji" aria-hidden="true">{item.character}</span>
-              <h3>{item.title}</h3>
-              <p class="desc">{item.description}</p>
-              <div class="tags">{item.tags.map((tag) => <span>{tag}</span>)}</div>
-              <div class="links">{item.links.map((link) => <span>{link}</span>)}</div>
+            <a class="group relative flex flex-col gap-[1em] rounded-sm border border-line bg-[rgba(255,252,242,.4)] px-[1.7em] pt-[2em] pb-[1.7em] text-inherit no-underline transition-[transform,border-color,box-shadow] duration-450 ease-in-out hover:-translate-y-[5px] hover:border-[rgba(177,58,42,.55)] hover:shadow-[0_14px_30px_-18px_rgba(53,48,42,.4)]" href={item.href}>
+              <span class="flex h-11 w-11 -rotate-2 items-center justify-center rounded-[3px] border-[1.4px] border-ink text-[22px] font-semibold group-hover:border-vermilion group-hover:text-vermilion" aria-hidden="true">{item.character}</span>
+              <h3 class="m-0 text-[17.5px] font-semibold tracking-[.12em]">{item.title}</h3>
+              <p class="m-0 flex-1 text-[13px] leading-8 tracking-[.08em] text-ink-soft">{item.description}</p>
+              <div class="flex flex-wrap gap-2">{item.tags.map((tag) => <span class="rounded-xs border border-line px-[.8em] py-[.35em] font-latin text-[10.5px] tracking-[.22em] text-ink-faint">{tag}</span>)}</div>
+              <div class="flex gap-[1.6em] font-latin text-[11.5px] font-semibold tracking-[.26em] text-vermilion">{item.links.map((link) => <span>{link}</span>)}</div>
             </a>
           ))}
         </div>
@@ -213,36 +228,36 @@ const formatBlogDate = (date: Date) =>
 
 <!-- ============ BLOG ============ -->
 <div class="view" data-route="blog">
-  <main>
-    <section id="blog">
-      <span class="kanji-ghost" aria-hidden="true">記</span>
+  <main class="relative z-5">
+    <section class="relative mx-auto min-h-[78svh] max-w-[1060px] px-[7vw] pt-[17vh] pb-[13vh] max-mobile:px-[8vw] max-mobile:pt-[14vh] max-mobile:pb-[10vh]" id="blog">
+      <span class="pointer-events-none absolute top-1/2 right-[2%] -translate-y-1/2 text-[min(32vmin,320px)] leading-none font-semibold text-ink opacity-5 select-none max-mobile:text-[42vmin]" aria-hidden="true">記</span>
       <div class="reveal">
-        <p class="eyebrow">{blog.eyebrow}</p>
-        <h2>{blog.title}</h2>
-        <ul class="posts">
+        <p class="m-0 mb-[2em] flex items-center gap-3.5 font-latin text-xs font-semibold tracking-[.44em] text-vermilion before:h-px before:w-9 before:bg-current before:opacity-60">{blog.eyebrow}</p>
+        <h2 class="m-0 mb-[1.2em] text-[clamp(25px,3.4vmin,36px)] font-medium tracking-[.14em]">{blog.title}</h2>
+        <ul class="m-0 mt-[2.6em] list-none border-t border-line p-0">
           {posts.map((post) => (
-            <li><a href={`/blog/${post.id}/`}>
-              <span class="date">{formatBlogDate(post.data.pubDate)}</span>
-              <span class="pf" aria-hidden="true">{post.data.source}</span>
-              <span class="ttl">{post.data.title}</span>
+            <li><a class="group flex items-center gap-[1.6em] border-b border-line px-[.4em] py-[1.5em] text-inherit no-underline transition-colors duration-350 hover:bg-[rgba(177,58,42,.05)]" href={`/blog/${post.id}/`}>
+              <span class="min-w-[6.2em] font-latin text-xs tracking-[.2em] text-ink-faint max-mobile:min-w-[5.4em] max-mobile:text-[11px]">{formatBlogDate(post.data.pubDate)}</span>
+              <span class="flex h-6 w-6 flex-none -rotate-2 items-center justify-center rounded-[3px] border-[1.3px] border-ink font-latin text-xs font-semibold group-hover:border-vermilion group-hover:text-vermilion" aria-hidden="true">{post.data.source}</span>
+              <span class="text-[14.5px] leading-[1.9] tracking-[.08em]">{post.data.title}</span>
             </a></li>
           ))}
         </ul>
-        <p class="blog-note">{blog.note}</p>
+        <p class="mt-[2.2em] mb-[1em] text-[12.5px] tracking-[.14em] text-ink-faint">{blog.note}</p>
       </div>
     </section>
   </main>
 </div>
 
 <!-- ============ footer ============ -->
-<footer>
-  <div class="sns">
-    <a href="#" aria-label="GitHub"><span class="hanko">G</span><span class="lbl">GITHUB</span></a>
-    <a href="#" aria-label="X"><span class="hanko">X</span><span class="lbl">X</span></a>
-    <a href="#" aria-label="Zenn"><span class="hanko">Z</span><span class="lbl">ZENN</span></a>
-    <a href="#" aria-label="Qiita"><span class="hanko">Q</span><span class="lbl">QIITA</span></a>
+<footer class="flex flex-col items-center gap-[2.4em] border-t border-line px-[7vw] pt-[8vh] pb-[4em] text-center">
+  <div class="flex flex-wrap justify-center gap-[2.4em]">
+    <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href="#" aria-label="GitHub"><span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">G</span><span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">GITHUB</span></a>
+    <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href="#" aria-label="X"><span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">X</span><span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">X</span></a>
+    <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href="#" aria-label="Zenn"><span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">Z</span><span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">ZENN</span></a>
+    <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href="#" aria-label="Qiita"><span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">Q</span><span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">QIITA</span></a>
   </div>
-  <span class="copy">© 2026 Juna1013</span>
+  <span class="font-latin text-[11px] tracking-[.3em] text-ink-faint">© 2026 Juna1013</span>
 </footer>
 
 <script src="../scripts/main.js"></script>

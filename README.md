@@ -1,6 +1,6 @@
 # JUNA Portfolio
 
-Astroで構築したポートフォリオサイトです。
+Astro 5とTailwind CSS 4で構築したポートフォリオサイトです。
 
 ## 開発
 
@@ -46,15 +46,17 @@ source: Z
 
 ファイル名が記事URLになります。たとえば `src/content/blog/hello.md` は `/blog/hello/` として公開されます。下書きにしたい場合は、フロントマターに `draft: true` を追加してください。
 
-見た目やレイアウトは `src/styles/global.css`、桜・波紋・画面遷移などの動きは `src/scripts/main.js` で編集できます。
+見た目やレイアウトは各AstroファイルのTailwind CSSユーティリティ、カラーテーマやアニメーションは `src/styles/global.css`、桜・波紋・画面遷移などの動きは `src/scripts/main.js` で編集できます。
 
 ## ディレクトリ構成
 
 ```text
 src/
+├── components/    # 共通Astroコンポーネント
 ├── data/          # About / Works / Blog の編集用データ
 ├── content/blog/  # Markdownで管理するブログ記事
 ├── pages/
+│   ├── blog/      # 記事ページ
 │   └── index.astro
 ├── scripts/
 │   └── main.js
