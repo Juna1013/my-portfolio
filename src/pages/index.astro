@@ -5,28 +5,18 @@ import HeroArtwork from '../components/HeroArtwork.astro';
 import SeoHead from '../components/SeoHead.astro';
 import SectionShell from '../components/SectionShell.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { about } from '../data/about';
+import { about, acknowledgment, copyright, hero, seo, socialLinks } from '../data/about';
 import { blog } from '../data/blog';
 import { works } from '../data/works';
-import { formatBlogDate } from '../utils/date';
+import { formatBlogDate, formatFootprintDate } from '../utils/date';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const title = '准 — JUNA | Portfolio';
-const description = '川崎准也（ジュナ）のポートフォリオ。LLMエージェントセキュリティの研究、公開アプリケーション、技術ブログの記録。';
-
-const socialLinks = [
-  { label: 'GitHub', mark: 'G', text: 'GITHUB', href: '#' },
-  { label: 'X', mark: 'X', text: 'X', href: '#' },
-  { label: 'Zenn', mark: 'Z', text: 'ZENN', href: '#' },
-  { label: 'Qiita', mark: 'Q', text: 'QIITA', href: '#' },
-] as const;
 ---
 <!DOCTYPE html>
 <html lang="ja" id="top">
 <head>
-<SeoHead {title} {description} />
+<SeoHead title={seo.title} description={seo.description} />
 </head>
 <body>
 
@@ -42,28 +32,44 @@ const socialLinks = [
     <HeroArtwork />
 
     <div class="absolute top-[clamp(300px,36vh,380px)] right-[6.5vw] z-4 flex flex-row-reverse gap-[2.4vmin] max-mobile:top-[30vh] max-mobile:right-[7vw]">
-      <h1 class="hero-name m-0 text-[clamp(44px,7.8vmin,88px)] leading-[1.08] font-medium tracking-[.16em] [writing-mode:vertical-rl]">桜花爛漫</h1>
-      <p class="hero-sub m-0 pt-[1.7em] text-[clamp(12px,1.9vmin,17px)] tracking-[.42em] text-ink-soft [writing-mode:vertical-rl]">静かに、手を動かす。</p>
+      <h1 class="hero-name m-0 text-[clamp(44px,7.8vmin,88px)] leading-[1.08] font-medium tracking-[.16em] [writing-mode:vertical-rl]">{hero.name}</h1>
+      <p class="hero-sub m-0 pt-[1.7em] text-[clamp(12px,1.9vmin,17px)] tracking-[.42em] text-ink-soft [writing-mode:vertical-rl]">{hero.sub}</p>
     </div>
 
-    <p class="hero-lead absolute bottom-[clamp(90px,16vh,160px)] left-[6.5vw] z-4 m-0 max-w-[44ch] text-[14.5px] leading-[2.3] tracking-[.14em] text-ink-soft max-mobile:bottom-[14vh] max-mobile:max-w-[64vw] max-mobile:text-[13px]">
-      茨城高専 機械制御系。LLMエージェントのセキュリティを研究しながら、<br>
-      墨のシミュレーションや、Webの小さな道具を作っています。
-      <span class="mt-[1.2em] block font-latin text-[10.5px] font-medium tracking-[.36em] text-ink-faint">STUDENT · BUILDER — JUNA</span>
+    <p class="hero-lead absolute bottom-[clamp(90px,16vh,160px)] left-[6.5vw] z-4 m-0 max-w-[44ch] text-[14.5px] leading-[2.3] tracking-[.14em] text-ink-soft max-mobile:bottom-[17vh] max-mobile:max-w-[64vw] max-mobile:[@media(min-height:820px)]:max-w-[80vw] max-mobile:text-[13px]">
+      {hero.leadLines.map((line, index) => (
+        <>
+          {index > 0 && <br />}
+          {line}
+        </>
+      ))}
+      <span class="mt-[1.2em] block font-latin text-[10.5px] font-medium tracking-[.36em] text-ink-faint">{hero.tagline}</span>
     </p>
 
-    <a class="scroll-hint absolute bottom-6 left-1/2 z-4 flex -translate-x-1/2 flex-col items-center gap-2.5 text-[11px] tracking-[.5em] text-ink-soft no-underline [writing-mode:vertical-rl]" href="#about">巡る<span class="scroll-line h-11 w-px origin-top bg-linear-to-b from-ink-soft to-transparent"></span></a>
+    <a class="scroll-hint absolute bottom-6 left-1/2 z-4 flex -translate-x-1/2 flex-col items-center gap-2.5 text-[11px] tracking-[.5em] text-ink-soft no-underline [writing-mode:vertical-rl]" href="#about">{hero.scrollHint}<span class="scroll-line h-11 w-px origin-top bg-linear-to-b from-ink-soft to-transparent"></span></a>
   </header>
   <SectionShell id="about" ghost="私" eyebrow={about.eyebrow} title={about.title}>
     {about.introduction.map((paragraph) => <p class="my-[1em] text-[15px] leading-[2.35] tracking-[.1em] text-[#4c453d]">{paragraph}</p>)}
+
+    <div class="mt-[3.2em]">
+      {about.skills.map((group) => (
+        <div class="mt-[2.2em] first:mt-0">
+          <h3 class="m-0 mb-[1.2em] font-latin text-xs font-semibold tracking-[.32em] text-ink-soft">{group.title}</h3>
+          <div class="flex flex-wrap gap-2">
+            {group.items.map((item) => <span class="rounded-xs border border-line px-[.9em] py-[.45em] font-latin text-[11px] tracking-[.18em] text-ink-soft">{item}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
 
     <div slot="after" class="reveal mt-[5em]">
       <h3 class="m-0 mb-[2.2em] flex items-center gap-3.5 text-[17px] font-semibold tracking-[.3em]">{about.footprint.title}<span class="font-latin text-[11px] font-medium tracking-[.4em] text-ink-faint">{about.footprint.subtitle}</span></h3>
       <ul class="relative m-0 list-none py-0 pr-0 pl-[26px] before:absolute before:top-1.5 before:bottom-1.5 before:left-0 before:w-0.5 before:rounded-sm before:bg-[linear-gradient(to_bottom,var(--color-ink)_0%,rgba(53,48,42,.35)_85%,transparent)] before:content-['']">
         {about.footprint.entries.map((entry) => (
           <li class="relative pb-[2.1em] pl-[22px] before:absolute before:top-[9px] before:left-[-26px] before:h-[9px] before:w-[9px] before:translate-x-[-3.5px] before:rotate-8 before:rounded-full before:bg-ink before:shadow-[1.5px_1px_0_rgba(53,48,42,.35)] before:content-[''] last:before:bg-vermilion">
-            <span class="mb-[.35em] block font-latin text-[13px] font-semibold tracking-[.24em] text-vermilion">{entry.year}</span>
-            <span class="text-[14.5px] leading-8 tracking-[.1em] text-[#4c453d]">{entry.text}</span>
+            <span class="mb-[.35em] block font-latin text-[13px] font-semibold tracking-[.24em] text-vermilion">{formatFootprintDate(entry.year)}</span>
+            <span class="block text-[14.5px] leading-8 tracking-[.1em] text-[#4c453d]">{entry.text}</span>
+            {entry.description && <span class="mt-[.25em] block text-[12.5px] leading-7 tracking-[.08em] text-ink-faint">{entry.description}</span>}
           </li>
         ))}
       </ul>
@@ -108,13 +114,24 @@ const socialLinks = [
 <footer class="flex flex-col items-center gap-[2.4em] border-t border-line px-[7vw] pt-[8vh] pb-[4em] text-center">
   <div class="flex flex-wrap justify-center gap-[2.4em]">
     {socialLinks.map((link) => (
-      <a class="group flex flex-col items-center gap-[.7em] text-ink no-underline" href={link.href} aria-label={link.label}>
-        <span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink font-latin text-[17px] font-semibold transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">{link.mark}</span>
+      <a
+        class="group flex flex-col items-center gap-[.7em] text-ink no-underline"
+        href={link.href}
+        aria-label={link.label}
+        target={link.href.startsWith('http') ? '_blank' : undefined}
+        rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+      >
+        <span class="flex h-[46px] w-[46px] -rotate-2 items-center justify-center rounded-[3px] border-[1.6px] border-ink transition-all duration-350 group-hover:rotate-1 group-hover:border-vermilion group-hover:bg-vermilion group-hover:text-paper">
+          <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d={link.icon.path} /></svg>
+        </span>
         <span class="font-latin text-[10px] tracking-[.3em] text-ink-faint">{link.text}</span>
       </a>
     ))}
   </div>
-  <span class="font-latin text-[11px] tracking-[.3em] text-ink-faint">© 2026 Juna1013</span>
+  <p class="m-0 text-[11.5px] leading-7 tracking-[.14em] text-ink-faint">
+    {acknowledgment.prefix}<a class="text-ink-soft underline underline-offset-4 transition-colors duration-350 hover:text-vermilion" href={acknowledgment.href} target="_blank" rel="noopener noreferrer">{acknowledgment.linkText}</a>{acknowledgment.suffix}
+  </p>
+  <span class="font-latin text-[11px] tracking-[.3em] text-ink-faint">{copyright}</span>
 </footer>
 
 <script src="../scripts/main.js"></script>
