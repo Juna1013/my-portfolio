@@ -14,19 +14,31 @@
 
 @layer base {
   html {
-    background: var(--color-paper);
+    /* オーバースクロール時や描画が追いつかない領域も常にベージュにする */
+    background-color: var(--color-paper);
   }
 
   body {
     margin: 0;
+    min-height: 100svh;
     overflow-x: hidden;
     color: var(--color-ink);
     font-family: var(--font-mincho);
+    background-color: var(--color-paper);
+  }
+
+  /* グラデーションはビューポート固定のレイヤーに分離
+     （body に直接描くと高速スクロール時に塗り残しが白く見えるため） */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
     background:
       radial-gradient(1100px 700px at 12% 4%, rgba(196, 176, 138, 0.15), transparent 60%),
       radial-gradient(900px 620px at 88% 30%, rgba(190, 168, 128, 0.12), transparent 60%),
-      radial-gradient(1200px 800px at 50% 110%, rgba(172, 150, 112, 0.18), transparent 60%),
-      var(--color-paper);
+      radial-gradient(1200px 800px at 50% 110%, rgba(172, 150, 112, 0.18), transparent 60%);
   }
 
   ::selection {

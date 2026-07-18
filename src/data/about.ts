@@ -5,7 +5,7 @@ import { siGithub, siQiita, siX, siZenn } from 'simple-icons';
 // title はブログ記事ページのタイトル末尾（記事名 | 栖 - SUMIKA）や og:site_name にも使われます
 export const seo = {
   title: '栖 - SUMIKA',
-  description: 'Juna1013のポートフォリオ。LLMエージェントセキュリティの研究、公開アプリケーション、技術ブログの記録。',
+  description: '機械工学を専攻する高専生 Juna1013 のポートフォリオ。Webアプリケーションの制作物、Zenn / Qiita の技術記事、日々の学びの記録。',
   // meta author / article:author に使われる名前
   author: 'Juna1013',
 } as const;
@@ -13,13 +13,13 @@ export const seo = {
 // ヒーロー（ファーストビュー）の文言
 export const hero = {
   name: '桜花爛漫',
-  sub: '静かに、手を動かす。',
+  sub: 'いつかは散る、その花に。',
   // 1要素が1行として表示されます（行間に改行が入ります）
   leadLines: [
     '日々の記録と、開発したものと、考えたことを築く場所。',
     'I built thoughtful web interfaces with clean code and careful attention to detail. Currently exploring frontend development with TypeScript.',
   ],
-  tagline: 'STUDENT · BUILDER — JUNA',
+  tagline: 'STUDENT · BUILDER — JUNA1013',
   scrollHint: '巡る',
 } as const;
 

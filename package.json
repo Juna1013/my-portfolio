@@ -1,7 +1,7 @@
 {
   "name": "my-portfolio",
   "version": "1.0.0",
-  "description": "川崎准也（JUNA）の研究・制作・技術記事をまとめたAstroポートフォリオ",
+  "description": "Juna1013のポートフォリオ「栖 - SUMIKA」。制作物・技術記事・日々の記録をまとめたAstroサイト",
   "private": true,
   "type": "module",
   "scripts": {
