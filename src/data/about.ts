@@ -2,9 +2,12 @@
 import { siGithub, siQiita, siX, siZenn } from 'simple-icons';
 
 // <head> に出力されるページタイトルと説明文
+// title はブログ記事ページのタイトル末尾（記事名 | 栖 - SUMIKA）や og:site_name にも使われます
 export const seo = {
   title: '栖 - SUMIKA',
   description: 'Juna1013のポートフォリオ。LLMエージェントセキュリティの研究、公開アプリケーション、技術ブログの記録。',
+  // meta author / article:author に使われる名前
+  author: 'Juna1013',
 } as const;
 
 // ヒーロー（ファーストビュー）の文言

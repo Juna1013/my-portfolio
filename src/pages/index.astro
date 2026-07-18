@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import { getCollection } from 'astro:content';
 import HeroArtwork from '../components/HeroArtwork.astro';
 import SeoHead from '../components/SeoHead.astro';
 import SectionShell from '../components/SectionShell.astro';
@@ -9,9 +8,9 @@ import { about, acknowledgment, copyright, hero, seo, socialLinks } from '../dat
 import { blog } from '../data/blog';
 import { works } from '../data/works';
 import { formatBlogDate, formatFootprintDate } from '../utils/date';
+import { fetchLatestPosts } from '../utils/feeds';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = await fetchLatestPosts();
 ---
 <!DOCTYPE html>
 <html lang="ja" id="top">
@@ -101,10 +100,10 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <SectionShell id="blog" ghost="記" eyebrow={blog.eyebrow} title={blog.title}>
     <ul class="m-0 mt-[2.6em] list-none border-t border-line p-0">
       {posts.map((post) => (
-        <li><a class="group flex items-center gap-[1.6em] border-b border-line px-[.4em] py-[1.5em] text-inherit no-underline transition-colors duration-350 hover:bg-[rgba(177,58,42,.05)]" href={`/blog/${post.id}/`}>
-          <span class="min-w-[6.2em] font-latin text-xs tracking-[.2em] text-ink-faint max-mobile:min-w-[5.4em] max-mobile:text-[11px]">{formatBlogDate(post.data.pubDate)}</span>
-          <span class="flex h-6 w-6 flex-none -rotate-2 items-center justify-center rounded-[3px] border-[1.3px] border-ink font-latin text-xs font-semibold group-hover:border-vermilion group-hover:text-vermilion" aria-hidden="true">{post.data.source}</span>
-          <span class="text-[14.5px] leading-[1.9] tracking-[.08em]">{post.data.title}</span>
+        <li><a class="group flex items-center gap-[1.6em] border-b border-line px-[.4em] py-[1.5em] text-inherit no-underline transition-colors duration-350 hover:bg-[rgba(177,58,42,.05)]" href={post.url} target="_blank" rel="noopener noreferrer">
+          <span class="min-w-[6.2em] font-latin text-xs tracking-[.2em] text-ink-faint max-mobile:min-w-[5.4em] max-mobile:text-[11px]">{formatBlogDate(post.pubDate)}</span>
+          <span class="flex h-6 w-6 flex-none -rotate-2 items-center justify-center rounded-[3px] border-[1.3px] border-ink font-latin text-xs font-semibold group-hover:border-vermilion group-hover:text-vermilion" aria-hidden="true">{post.source}</span>
+          <span class="text-[14.5px] leading-[1.9] tracking-[.08em]">{post.title}</span>
         </a></li>
       ))}
     </ul>
