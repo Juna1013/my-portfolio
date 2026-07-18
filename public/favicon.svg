@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- 落款印風ロゴ: 朱色の印に桜を紙色の抜きで表現 -->
+  <defs>
+    <path id="petal" d="M50 42 C 43 36, 38.5 26, 43 17.5 C 45.5 12.5, 48 12, 50 17 C 52 12, 54.5 12.5, 57 17.5 C 61.5 26, 57 36, 50 42 Z" />
+  </defs>
+  <rect x="2" y="2" width="96" height="96" rx="24" fill="#b13a2a" />
+  <g fill="#f0e8d5">
+    <use href="#petal" />
+    <use href="#petal" transform="rotate(72 50 50)" />
+    <use href="#petal" transform="rotate(144 50 50)" />
+    <use href="#petal" transform="rotate(216 50 50)" />
+    <use href="#petal" transform="rotate(288 50 50)" />
+  </g>
+</svg>

@@ -11,12 +11,13 @@ export const seo = {
 } as const;
 
 // ヒーロー（ファーストビュー）の文言
+// leadLines / about.introduction では ==語== で囲むと朱色のマーカーが引かれます
 export const hero = {
   name: '桜花爛漫',
   sub: 'いつかは散る、その花に。',
   // 1要素が1行として表示されます（行間に改行が入ります）
   leadLines: [
-    '日々の記録と、開発したものと、考えたことを築く場所。',
+    '日々の記録と、開発したものと、考えたことを==築く場所==。',
     'I built thoughtful web interfaces with clean code and careful attention to detail. Currently exploring frontend development with TypeScript.',
   ],
   tagline: 'STUDENT · BUILDER — JUNA1013',
@@ -29,9 +30,9 @@ export const about = {
   title: 'A little about me',
   introduction: [
     '機械工学を専攻する高専生です。',
-    'Webアプリケーションを中心に趣味や授業で開発を行っています。時間を惜しまず、丁寧に開発することを心掛けています。',
-    'モダンまたは和風なデザインが好きです。',
-    'デザインに限らず、情報工学的な理論も好きです。特にLLMについては力を入れています。',
+    'Webアプリケーションを中心に趣味や授業で開発を行っています。時間を惜しまず、==丁寧に開発する==ことを心掛けています。',
+    'モダンまたは==和風なデザイン==が好きです。',
+    'デザインに限らず、情報工学的な理論も好きです。特に==LLM==については力を入れています。',
     'このサイトでは、個人的な制作物や日々の学び、記録などを残していくつもりです。'
   ],
   // 使っている技術・学んでいるもの（チップ状に並んで表示されます）

@@ -45,6 +45,19 @@
     background: rgba(177, 58, 42, 0.22);
   }
 
+  /* 和風スクロールバー（墨色・ホバーで朱） */
+  html {
+    scrollbar-color: rgba(138, 127, 112, 0.55) transparent;
+  }
+  ::-webkit-scrollbar { width: 11px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(138, 127, 112, 0.45);
+    border: 3px solid var(--color-paper);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(177, 58, 42, 0.6); }
+
   a:focus-visible,
   button:focus-visible {
     outline: 2px solid var(--color-vermilion);
@@ -66,6 +79,7 @@
 @keyframes wipe-out { from { transform: translateX(0) skewX(-8deg); } to { transform: translateX(118%) skewX(-8deg); } }
 @keyframes drop-in { 0% { opacity: 0.85; transform: translateY(-16px); } 70% { opacity: 0.8; transform: translateY(0); } 100% { opacity: 0; transform: translateY(0); } }
 @keyframes ripple { 0% { transform: scale(0.1); opacity: 0; } 12% { opacity: 0.5; } 100% { transform: scale(1); opacity: 0; } }
+@keyframes seal-pulse { 0% { box-shadow: 0 0 0 0 rgba(177, 58, 42, 0.4); } 70%, 100% { box-shadow: 0 0 0 11px rgba(177, 58, 42, 0); } }
 
 /* JavaScript state hooks and dynamically generated SVG animation. */
 .site-nav { opacity: 0; animation: fade-in 1.4s 0.5s forwards; }
@@ -73,7 +87,76 @@
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.24  0 0 0 0 0.21  0 0 0 0 0.17  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 .site-nav.immediate { opacity: 1; animation: none; }
-.nav-link.current { color: var(--color-vermilion); border-color: var(--color-vermilion); }
+
+/* ナビリンク: 朱の刷毛アンダーラインが左から走る */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-vermilion) 10%, rgba(177, 58, 42, 0.25));
+  transform: scaleX(0) skewX(-24deg);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.5, 0.1, 0.3, 1);
+}
+.nav-link:hover::after,
+.nav-link.current::after { transform: scaleX(1) skewX(-24deg); }
+.nav-link.current { color: var(--color-vermilion); }
+
+/* 朱の刷毛マーカー（==語== 記法で MarkedText から付与） */
+.marker {
+  padding: 0.05em 0.1em;
+  margin: 0 -0.04em;
+  background-image: linear-gradient(100deg,
+    rgba(177, 58, 42, 0) 0.5%,
+    rgba(177, 58, 42, 0.14) 4%,
+    rgba(177, 58, 42, 0.24) 50%,
+    rgba(177, 58, 42, 0.14) 96%,
+    rgba(177, 58, 42, 0) 99.5%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.58em;
+  background-position: 0 88%;
+}
+/* .reveal 内では出現に合わせて左から引かれる */
+.reveal .marker {
+  background-size: 0 0.58em;
+  transition: background-size 0.9s cubic-bezier(0.4, 0.1, 0.2, 1) 0.55s;
+}
+.reveal.in .marker { background-size: 100% 0.58em; }
+
+/* セクション見出し: 朱の筆線アンダーライン */
+.section-title { position: relative; display: inline-block; }
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -0.22em;
+  left: 0.04em;
+  width: 100%;
+  height: 0.16em;
+  border-radius: 999px 4px 999px 3px;
+  background: linear-gradient(90deg, rgba(177, 58, 42, 0.5), rgba(177, 58, 42, 0.14) 80%, rgba(177, 58, 42, 0));
+  transform: skewX(-18deg) scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.4, 0.1, 0.2, 1) 0.3s;
+}
+.reveal.in .section-title::after { transform: skewX(-18deg) scaleX(1); }
+
+/* 年表: 最新（朱点）が静かに鼓動する */
+.footprint li:last-child::after {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: -26px;
+  width: 9px;
+  height: 9px;
+  transform: translateX(-3.5px);
+  border-radius: 999px;
+  animation: seal-pulse 2.8s ease-out 0.8s infinite;
+}
 .view { display: none; }
 .view.active { display: block; }
 .wipe.cover { animation: wipe-in 0.36s cubic-bezier(0.6, 0.1, 0.4, 1) forwards; }

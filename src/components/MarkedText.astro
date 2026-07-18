@@ -1,0 +1,12 @@
+---
+// ==語== で囲まれた部分に朱の刷毛マーカー（.marker）を引いてテキストを描画します。
+// 例: 'モダンまたは==和風なデザイン==が好きです。'
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+// '==' で分割すると奇数番目の要素がマーカー対象になる
+const parts = text.split('==');
+---
+{parts.map((part, index) => (index % 2 === 1 ? <span class="marker">{part}</span> : part))}
